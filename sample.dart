@@ -4,13 +4,13 @@ class Node {
   Node(this.value);
 }
 
-class LinkedList {
+class Linkedlist {
   Node? head;
   Node? tail;
   int size = 0;
 
-  append(value) {
-    final node = Node(value);
+  append(vale) {
+    final node = Node(vale);
     if (head == null) {
       head = node;
       tail = node;
@@ -21,8 +21,8 @@ class LinkedList {
     size++;
   }
 
-  preppend(value) {
-    final node = Node(value);
+  preppend(vale) {
+    final node = Node(vale);
     if (head == null) {
       head = node;
       tail = node;
@@ -43,9 +43,14 @@ class LinkedList {
 }
 
 void main() {
-  var list = LinkedList();
+  var list = Linkedlist();
 
-  list.append(99);
-  list.preppend(66);
+  list.append(10);
+  list.append(55);
+  list.append(66);
+  list.append(13);
+  list.append(100);
+  list.preppend(99);
+
   list.printList();
 }
