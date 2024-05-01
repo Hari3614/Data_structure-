@@ -9,8 +9,8 @@ class Linkedlist {
   Node? tail;
   int size = 0;
 
-  append(vale) {
-    final node = Node(vale);
+  append(value) {
+    final node = Node(value);
     if (head == null) {
       head = node;
       tail = node;
@@ -21,14 +21,23 @@ class Linkedlist {
     size++;
   }
 
-  preppend(vale) {
-    final node = Node(vale);
-    if (head == null) {
-      head = node;
-      tail = node;
+  insert(index, value) {
+    if (index < 0 || index > size) {
+      print("invalid");
+      return;
+    }
+    Node newNode = Node(value);
+    if (index == 0) {
+      newNode.next = head;
+      head = newNode;
+      if (tail == null) tail = newNode;
     } else {
-      node.next = head;
-      head = node;
+      Node? currunt = head;
+      for (int i = 0; i < index - 1; i++) currunt = currunt?.next;
+      newNode.next = currunt!.next;
+      currunt.next = newNode;
+
+      if (index == size) tail = newNode;
     }
     size++;
   }
@@ -43,14 +52,12 @@ class Linkedlist {
 }
 
 void main() {
-  var list = Linkedlist();
+  final list = Linkedlist();
 
   list.append(10);
-  list.append(55);
-  list.append(66);
-  list.append(13);
-  list.append(100);
-  list.preppend(99);
+  list.append(10);
+
+  list.insert(0, 99);
 
   list.printList();
 }

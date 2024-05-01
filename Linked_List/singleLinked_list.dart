@@ -122,6 +122,19 @@ class LinkedList {
     size++;
   }
 
+  reverse() {
+    var curr = head;
+    var prev = null;
+    while (curr != null) {
+      var next = curr.next;
+      curr.next = prev;
+      prev = curr;
+      curr = next;
+    }
+    tail = head;
+    head = prev;
+  }
+
   printList() {
     var current = head;
     while (current != null) {
@@ -140,5 +153,7 @@ void main() {
   list.append(50);
   list.preppend(11);
   list.insert(2, 99);
+
+  list.reverse();
   list.printList();
 }
