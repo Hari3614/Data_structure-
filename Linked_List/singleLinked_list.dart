@@ -1,70 +1,3 @@
-// class Node {
-//   late int value;
-//   Node? next;
-
-//   Node(int value) {
-//     this.value = value;
-//     next = null;
-//   }
-// }
-
-// class LinkedList {
-//   Node? head;
-//   Node? tail;
-//   late int size;
-
-//   LinkedList() {
-//     head = null;
-//     tail = null;
-//     size = 0;
-//   }
-
-//   bool isEmpty() {
-//     return size == 0;
-//   }
-
-//   void append(int value) {
-//     Node node = Node(value);
-//     if (isEmpty()) {
-//       head = node;
-//       tail = node;
-//     } else {
-//       tail?.next = node;
-//       tail = node;
-//     }
-//     size++;
-//   }
-
-//   // void printList() {
-//   //   Node? current = head;
-//   //   while (current != null) {
-//   //     print(current.value);
-//   //     current = current.next;
-//   //   }
-//   // }
-//   void printList() {
-//     List<int> listArray = []; // Initialize an empty list to store values
-//     Node? current = head;
-
-//     while (current != null) {
-//       listArray
-//           .add(current.value); // Add the value of the current node to the list
-//       current = current.next; // Move to the next node
-//     }
-
-//     print(
-//         listArray); // Print the array containing the values of the linked list
-//   }
-// }
-
-// void main() {
-//   LinkedList list = LinkedList();
-//   list.append(10);
-//   list.append(20);
-
-//   list.printList();
-// }
-
 class Node {
   late int value;
   Node? next;
@@ -125,6 +58,7 @@ class LinkedList {
   reverse() {
     var curr = head;
     var prev = null;
+
     while (curr != null) {
       var next = curr.next;
       curr.next = prev;
@@ -133,6 +67,68 @@ class LinkedList {
     }
     tail = head;
     head = prev;
+  }
+
+  removeAt(int index) {
+    if (index == 0) {
+      if (this.size == 1) {
+        this.head = null;
+        this.tail = null;
+      } else {
+        this.head = this.head?.next;
+      }
+    } else {
+      Node? removeNode;
+      var curr = this.head;
+      for (var i = 0; i < index - 1; i++) {
+        curr = curr!.next;
+      }
+      removeNode = curr!.next;
+      curr.next = removeNode!.next;
+      if (index == this.size - 1) {
+        this.tail = curr;
+      }
+    }
+    this.size--;
+  }
+
+  int sumOf() {
+    int sum = 0;
+    var curr = this.head;
+    while (curr != null) {
+      sum += curr.value;
+      curr = curr.next;
+    }
+    return sum;
+  }
+
+  removeVal(value) {
+    var prev = this.head;
+    if (value == this.head?.value) {
+      this.head = this.head?.next;
+      this.size--;
+      return;
+    } else {
+      var removeNode;
+      while (prev?.next != null && prev!.next!.value != value) {
+        prev = prev.next;
+      }
+      removeNode = prev?.next;
+      prev?.next = removeNode.next;
+      this.size--;
+      return;
+    }
+  }
+
+  merge(LinkedList list2) {
+    if (head == null) {
+      return list2;
+    }
+    tail!.next = list2.head;
+    tail = list2.tail;
+    size += list2.size;
+    list2.head = list2.tail = null;
+    list2.size = 0;
   }
 
   printList() {
@@ -154,6 +150,18 @@ void main() {
   list.preppend(11);
   list.insert(2, 99);
 
-  list.reverse();
+  list.removeAt(0);
+  //print(list.sumOf());
+
+  //list.reverse();
+  list.printList();
+
+  final list2 = LinkedList();
+
+  list2.append(200);
+  list2.append(200);
+  list2.append(200);
+  list.merge(list2);
+
   list.printList();
 }
