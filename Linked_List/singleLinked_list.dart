@@ -10,6 +10,8 @@ class LinkedList {
   Node? tail;
   int size = 0;
 
+//<<<<<<<<<<.......Append.......>>>>>>>>>>
+
   append(int value) {
     final node = Node(value);
     if (head == null) {
@@ -22,6 +24,8 @@ class LinkedList {
     size++;
   }
 
+//<<<<<<<<<<.......Preppend.......>>>>>>>>>>
+
   preppend(int Value) {
     final node = Node(Value);
     if (head == null) {
@@ -33,6 +37,8 @@ class LinkedList {
     }
     size++;
   }
+
+//<<<<<<<<<<.......Insert.......>>>>>>>>>>
 
   insert(int index, int value) {
     if (index < 0 || index > size) {
@@ -55,6 +61,8 @@ class LinkedList {
     size++;
   }
 
+//<<<<<<<<<<.......Reverse.......>>>>>>>>>>
+
   reverse() {
     var curr = head;
     var prev = null;
@@ -68,6 +76,8 @@ class LinkedList {
     tail = head;
     head = prev;
   }
+
+//<<<<<<<<<<.......Remove At.......>>>>>>>>>>
 
   removeAt(int index) {
     if (index == 0) {
@@ -92,6 +102,8 @@ class LinkedList {
     this.size--;
   }
 
+//<<<<<<<<<<.......Sum.......>>>>>>>>>>
+
   int sumOf() {
     int sum = 0;
     var curr = this.head;
@@ -101,6 +113,8 @@ class LinkedList {
     }
     return sum;
   }
+
+//<<<<<<<<<<.......Remove Value.......>>>>>>>>>>
 
   removeVal(value) {
     var prev = this.head;
@@ -119,6 +133,8 @@ class LinkedList {
       return;
     }
   }
+
+//<<<<<<<<<<.......Merge.......>>>>>>>>>>
 
   merge(LinkedList list2) {
     if (head == null) {

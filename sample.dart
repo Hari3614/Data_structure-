@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 class Node {
   late int value;
   Node? next;
@@ -9,16 +11,15 @@ class linkedList {
   Node? tail;
   int size = 0;
 
-  appand(value) {
+  append(value) {
     final node = Node(value);
     if (head == null) {
       head = node;
       tail = node;
     } else {
-      tail?.next = node;
+      tail!.next = node;
       tail = node;
     }
-
     size++;
   }
 
@@ -34,12 +35,13 @@ class linkedList {
     size++;
   }
 
-  insert(index, value) {
+  insert(value, index) {
     if (index < 0 || index > size) {
-      print('invalid');
+      print('invalide');
       return;
     }
-    Node? newNode = Node(value);
+
+    Node newNode = Node(value);
     if (index == 0) {
       newNode.next = head;
       head = newNode;
@@ -55,9 +57,8 @@ class linkedList {
   }
 
   reverse() {
-    var curr = head;
+    Node? curr = head;
     var prev = null;
-
     while (curr != null) {
       var next = curr.next;
       curr.next = prev;
@@ -68,31 +69,7 @@ class linkedList {
     head = prev;
   }
 
-  // removeAt(int index) {
-  //   if (index == 0) {
-  //     if (this.size == 1) {
-  //       this.head = null;
-  //       this.tail = null;
-  //     } else {
-  //       this.head = this.head?.next;
-  //     }
-  //   } else {
-  //     Node? removeNode;
-  //     var curr = this.head;
-  //     for (int i = 0; i < index - 1; i++) {
-  //       curr = curr!.next;
-  //     }
-
-  //     removeNode = curr!.next;
-  //     curr.next = removeNode!.next;
-  //     if (index == this.size - 1) {
-  //       this.tail = curr;
-  //     }
-  //   }
-  //   this.size--;
-  // }
-
-  removeAt(int index) {
+  remove(int index) {
     if (index == 0) {
       if (this.size == 1) {
         this.head = null;
@@ -109,10 +86,10 @@ class linkedList {
       removeNode = curr!.next;
       curr.next = removeNode!.next;
       if (index == this.size - 1) {
-        this.tail = curr;
+        tail == curr;
       }
+      this.size--;
     }
-    this.size--;
   }
 
   printList() {
@@ -127,13 +104,15 @@ class linkedList {
 void main() {
   final list = linkedList();
 
-  list.appand(10);
-  list.appand(30);
-  list.preppend(55);
-
-  list.insert(0, 99);
-
+  list.append(20);
+  list.append(20);
+  list.append(20);
+  list.append(20);
+  list.preppend(30);
+  list.insert(99, 1);
   //list.reverse();
+
+  list.remove(0);
 
   list.printList();
 }
