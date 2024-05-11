@@ -1,8 +1,7 @@
 linearSearch(arr, target) {
   for (int i = 0; i < arr.length; i++) {
     if (arr[i] == target) {
-      arr[i] = 0;
-      return arr;
+      return i;
     }
   }
   return -1;

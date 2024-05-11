@@ -147,6 +147,84 @@ class LinkedList {
     list2.size = 0;
   }
 
+  //<<<<<<<<<<.......Middle.......>>>>>>>>>>
+
+  middle() {
+    var slow = head;
+    var fast = head;
+    while (fast != null && fast.next != null) {
+      slow = slow!.next;
+      fast = fast.next!.next;
+    }
+    return slow!.value;
+  }
+
+//<<<<<<<<<<.......Palindrome.......>>>>>>>>>>
+
+  isPalindrome() {
+    Node? curr = head;
+    List<String> str = [];
+
+    while (curr != null) {
+      str.add(curr.value as String);
+      curr = curr.next;
+    }
+
+    int start = 0;
+    int end = str.length - 1;
+
+    while (start < end) {
+      if (str[start] != str[end]) {
+        return false;
+      }
+      start++;
+      end--;
+    }
+
+    return true;
+  }
+
+//<<<<<<<<<<.......search.......>>>>>>>>>>
+
+  search(val) {
+    int i = 0;
+    Node? curr = head;
+
+    while (curr != null) {
+      if (curr.value == val) {
+        return i;
+      }
+      curr = curr.next;
+      i++;
+    }
+
+    return -1;
+  }
+
+//<<<<<<<<<<.......second Largest.......>>>>>>>>>>
+
+  int findSecondMax() {
+    if (head == null) {
+      print("List is empty.");
+    }
+
+    int max = head!.value;
+    int secondMax = head!.value;
+    Node? curr = head;
+
+    while (curr != null) {
+      if (curr.value > max) {
+        secondMax = max;
+        max = curr.value;
+      } else if (curr.value > secondMax && curr.value != max) {
+        secondMax = curr.value;
+      }
+      curr = curr.next;
+    }
+
+    return secondMax;
+  }
+
   printList() {
     var current = head;
     while (current != null) {
@@ -166,18 +244,21 @@ void main() {
   list.preppend(11);
   list.insert(2, 99);
 
-  list.removeAt(0);
+  print(list.findSecondMax());
+
+  // list.removeAt(0);
+
   //print(list.sumOf());
 
   //list.reverse();
   list.printList();
 
-  final list2 = LinkedList();
+  // final list2 = LinkedList();
 
-  list2.append(200);
-  list2.append(200);
-  list2.append(200);
-  list.merge(list2);
+  // list2.append(200);
+  // list2.append(200);
+  // list2.append(200);
+  // list.merge(list2);
 
-  list.printList();
+  // list.printList();
 }

@@ -1,40 +1,80 @@
 class Node {
   late int value;
   Node? next;
-  Node? prev;
   Node(this.value);
 }
 
-class linkedList {
+class linkeList {
   Node? head;
   Node? tail;
   int size = 0;
 
   appand(value) {
-    Node? node = Node(value);
+    final node = Node(value);
     if (head == null) {
       head = node;
       tail = node;
     } else {
       tail!.next = node;
-      node.prev = tail;
       tail = node;
     }
     size++;
   }
 
-  preppand(value) {
-    Node? node = Node(value);
-
-    if (head == null) {
-      head = node;
-      tail = node;
+  removeAt(index) {
+    if (index == 0) {
+      if (this.size == 1) {
+        head = null;
+        tail = null;
+      } else {
+        head = head!.next;
+      }
     } else {
-      node.next = head;
-      head!.prev = node;
-      head = node;
+      Node? removeNode;
+      var curr = head;
+      for (int i = 0; i < index - 1; i++) {
+        curr = curr!.next;
+      }
+      removeNode = curr!.next;
+      curr.next = removeNode!.next;
+      if (index == this.size - 1) {
+        tail = curr;
+      }
+    }
+    this.size--;
+  }
+
+  insert(index, value) {
+    if (index < 0 || index > size) {
+      print('inavlide');
+      return;
+    }
+    Node? newNode = Node(value);
+    if (index == 0) {
+      newNode.next = head;
+      head = newNode;
+      if (tail == null) tail = newNode;
+    } else {
+      Node? curr = head;
+      for (int i = 0; i < index - 1; i++) curr = curr!.next;
+      newNode.next = curr!.next;
+      curr.next = newNode;
+      if (index == size) tail = newNode;
     }
     size++;
+  }
+
+  reverse() {
+    Node? curr = head;
+    var prev = null;
+    while (curr != null) {
+      var next = curr.next;
+      curr.next = prev;
+      prev = curr;
+      curr = next;
+    }
+    tail = head;
+    head = prev;
   }
 
   printList() {
@@ -47,10 +87,13 @@ class linkedList {
 }
 
 void main() {
-  final list = linkedList();
+  final list = linkeList();
+  list.appand(30);
+  list.appand(30);
+  list.appand(30);
+  // list.removeAt(2);
+  list.insert(1, 99);
+  list.reverse();
 
-  list.appand(10);
-
-  list.preppand(40);
   list.printList();
 }
