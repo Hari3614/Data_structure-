@@ -1,80 +1,66 @@
 class Node {
   late int value;
   Node? next;
+  Node? prev;
   Node(this.value);
 }
 
-class linkeList {
+class linkedList {
   Node? head;
   Node? tail;
   int size = 0;
 
-  appand(value) {
-    final node = Node(value);
+  appende(value) {
+    Node? node = Node(value);
     if (head == null) {
       head = node;
       tail = node;
     } else {
       tail!.next = node;
+      node.prev = tail;
       tail = node;
     }
     size++;
   }
 
-  removeAt(index) {
-    if (index == 0) {
-      if (this.size == 1) {
-        head = null;
-        tail = null;
-      } else {
-        head = head!.next;
-      }
+  preppend(value) {
+    Node? node = Node(value);
+    if (head == null) {
+      head = node;
+      tail = node;
     } else {
-      Node? removeNode;
-      var curr = head;
-      for (int i = 0; i < index - 1; i++) {
-        curr = curr!.next;
-      }
-      removeNode = curr!.next;
-      curr.next = removeNode!.next;
-      if (index == this.size - 1) {
-        tail = curr;
-      }
-    }
-    this.size--;
-  }
-
-  insert(index, value) {
-    if (index < 0 || index > size) {
-      print('inavlide');
-      return;
-    }
-    Node? newNode = Node(value);
-    if (index == 0) {
-      newNode.next = head;
-      head = newNode;
-      if (tail == null) tail = newNode;
-    } else {
-      Node? curr = head;
-      for (int i = 0; i < index - 1; i++) curr = curr!.next;
-      newNode.next = curr!.next;
-      curr.next = newNode;
-      if (index == size) tail = newNode;
+      node.next = head;
+      head!.prev = node;
+      head = node;
     }
     size++;
   }
 
-  reverse() {
-    Node? curr = head;
-    var prev = null;
-    while (curr != null) {
-      var next = curr.next;
-      curr.next = prev;
-      prev = curr;
-      curr = next;
+  remove(index) {
+    if (index < 0 || index > size) {
+      print('invalide');
+      return;
     }
-    tail = head;
-    head = prev;
+    if (index == 0) {
+      if (size == 1) {
+        head = null;
+        tail = null;
+      } else {
+        head = head!.next;
+        head!.prev = null;
+      }
+    } else if (index == size - 1) {
+      tail = tail!.prev;
+      tail!.next = null;
+    } else {
+      Node? curr = head;
+      for (int i = 0; i < index; i++) {
+        curr = curr!.next;
+      }
+      curr!.prev!.next = curr.next;
+      curr.next!.prev = curr.prev;
+    }
+    size--;
   }
 
   printList() {
@@ -87,13 +73,11 @@ class linkeList {
 }
 
 void main() {
-  final list = linkeList();
-  list.appand(30);
-  list.appand(30);
-  list.appand(30);
-  // list.removeAt(2);
-  list.insert(1, 99);
-  list.reverse();
+  final list = linkedList();
 
+  list.appende(25);
+  list.preppend(33);
+
+  list.remove(0);
   list.printList();
 }

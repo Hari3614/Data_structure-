@@ -60,6 +60,35 @@ class DoublyLinkedList {
     size++;
   }
 
+  removeAt(int index) {
+    if (index < 0 || index >= size) {
+      print('Index out of bounds');
+      return;
+    }
+
+    if (index == 0) {
+      if (size == 1) {
+        head = null;
+        tail = null;
+      } else {
+        head = head!.next;
+        head!.prev = null;
+      }
+    } else if (index == size - 1) {
+      tail = tail!.prev;
+      tail!.next = null;
+    } else {
+      Node? curr = head;
+      for (var i = 0; i < index; i++) {
+        curr = curr!.next;
+      }
+      curr!.prev!.next = curr.next;
+      curr.next!.prev = curr.prev;
+    }
+
+    size--;
+  }
+
   reverse() {
     var curr = head;
     Node? temp;
