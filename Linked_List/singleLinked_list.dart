@@ -225,6 +225,27 @@ class LinkedList {
     return secondMax;
   }
 
+//<<<<<<<<<<.......Remove Duplicate.......>>>>>>>>>>
+
+  removeDuplicates() {
+    Set<int> seen = {};
+    Node? curr = head;
+    Node? prev;
+
+    while (curr != null) {
+      if (seen.contains(curr.value)) {
+        prev?.next = curr.next;
+        if (curr == tail) {
+          tail = prev;
+        }
+      } else {
+        seen.add(curr.value);
+        prev = curr;
+      }
+      curr = curr.next;
+    }
+  }
+
   printList() {
     var current = head;
     while (current != null) {

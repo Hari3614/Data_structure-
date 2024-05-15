@@ -1,5 +1,3 @@
-import 'dart:collection';
-
 class Node {
   late int value;
   Node? next;
@@ -11,8 +9,8 @@ class linkedList {
   Node? tail;
   int size = 0;
 
-  append(value) {
-    final node = Node(value);
+  appande(value) {
+    Node? node = Node(value);
     if (head == null) {
       head = node;
       tail = node;
@@ -24,7 +22,7 @@ class linkedList {
   }
 
   preppend(value) {
-    final node = Node(value);
+    Node? node = Node(value);
     if (head == null) {
       head = node;
       tail = node;
@@ -35,12 +33,11 @@ class linkedList {
     size++;
   }
 
-  insert(value, index) {
+  insert(index, value) {
     if (index < 0 || index > size) {
       print('invalide');
       return;
     }
-
     Node newNode = Node(value);
     if (index == 0) {
       newNode.next = head;
@@ -69,27 +66,37 @@ class linkedList {
     head = prev;
   }
 
-  remove(int index) {
+  remove(index) {
     if (index == 0) {
-      if (this.size == 1) {
-        this.head = null;
-        this.tail = null;
+      if (size == 1) {
+        head = null;
+        tail = null;
       } else {
-        this.head = this.head?.next;
+        head = head!.next;
       }
     } else {
       Node? removeNode;
-      var curr = this.head;
+      var curr = head;
       for (int i = 0; i < index - 1; i++) {
         curr = curr!.next;
       }
       removeNode = curr!.next;
       curr.next = removeNode!.next;
-      if (index == this.size - 1) {
-        tail == curr;
+      if (index == size - 1) {
+        tail = curr;
       }
-      this.size--;
     }
+    size--;
+  }
+
+  sum() {
+    int sum = 0;
+    var curr = head;
+    while (curr != null) {
+      sum += curr.value;
+      curr = curr.next;
+    }
+    return sum;
   }
 
   printList() {
@@ -104,15 +111,13 @@ class linkedList {
 void main() {
   final list = linkedList();
 
-  list.append(20);
-  list.append(20);
-  list.append(20);
-  list.append(20);
-  list.preppend(30);
-  list.insert(99, 1);
-  //list.reverse();
+  list.appande(44);
+  list.appande(33);
+  list.preppend(55);
+  list.insert(1, 22);
+  // list.reverse();
+  // list.remove(0);
 
-  list.remove(0);
-
+  print(list.sum());
   list.printList();
 }
