@@ -5,7 +5,7 @@ class Queue {
     return items.isEmpty;
   }
 
-  equeque(value) {
+  enqueue(dynamic value) {
     items.add(value);
   }
 
@@ -22,14 +22,12 @@ class Queue {
 }
 
 void main() {
-  var que = Queue();
-
-  que.equeque(99);
-  que.equeque(99);
-  que.equeque(99);
-  que.equeque(99);
-
-  que.dequeue();
-
-  que.display();
+  var queue = Queue();
+  queue.enqueue(12);
+  queue.enqueue(13);
+  queue.enqueue(14);
+  queue.enqueue(15);
+  queue.display();
+  queue.dequeue();
+  queue.display();
 }
