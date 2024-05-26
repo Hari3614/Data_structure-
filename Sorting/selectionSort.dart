@@ -6,7 +6,6 @@ selection(List<int> arr) {
         min = j;
       }
     }
-    // Swap elements
     int temp = arr[i];
     arr[i] = arr[min];
     arr[min] = temp;
@@ -15,5 +14,5 @@ selection(List<int> arr) {
 }
 
 void main() {
-  print(selection([2, 7, 5, 4, 2, 1])); // Output: [1, 2, 2, 4, 5, 7]
+  print(selection([2, 7, 5, 4, 2, 1]));
 }

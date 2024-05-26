@@ -1,35 +1,17 @@
-class Queue {
-  List<dynamic> items = [];
+insertionSort(List<int> arr) {
+  for (int i = 0; i < arr.length - 1; i++) {
+    int temp = arr[i];
+    int j = i - 1;
 
-  isEmpty() {
-    return items.isEmpty;
-  }
-
-  equeque(value) {
-    items.add(value);
-  }
-
-  dequeue() {
-    if (isEmpty()) {
-      return null;
+    while (j >= 0 && arr[j] > temp) {
+      arr[j + 1] = arr[j];
+      j = j - 1;
     }
-    return items.removeAt(0);
+    arr[j + 1] = temp;
   }
-
-  display() {
-    print(items);
-  }
+  return arr;
 }
 
 void main() {
-  var que = Queue();
-
-  que.equeque(99);
-  que.equeque(99);
-  que.equeque(99);
-  que.equeque(99);
-
-  que.dequeue();
-
-  que.display();
+  print(insertionSort([0, 99, 5, 4, 8, 10]));
 }
