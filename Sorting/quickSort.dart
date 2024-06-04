@@ -1,4 +1,4 @@
-List<int> quick(List<int> arr) {
+quick(List<int> arr) {
   if (arr.length < 2) {
     return arr;
   }

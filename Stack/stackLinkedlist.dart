@@ -90,6 +90,19 @@ class Stack {
       current = current.next;
     }
   }
+
+  reverseString(String input) {
+    var charStack = <String>[];
+    for (var char in input.split('')) {
+      charStack.add(char);
+    }
+
+    var reversed = '';
+    while (charStack.isNotEmpty) {
+      reversed += charStack.removeLast();
+    }
+    return reversed;
+  }
 }
 
 void main() {
