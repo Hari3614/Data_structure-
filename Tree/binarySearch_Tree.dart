@@ -22,7 +22,7 @@ class BinarySearchTree {
     }
   }
 
-  void _insertNode(Node? root, Node node) {
+  _insertNode(Node? root, Node node) {
     if (root == null) return;
 
     if (root.value > node.value) {
@@ -113,7 +113,7 @@ class BinarySearchTree {
     }
   }
 
-  void delete(int value) {
+  delete(int value) {
     root = _deleteNode(root, value);
   }
 
@@ -161,6 +161,20 @@ class BinarySearchTree {
     int leftHeight = getHeight(root.left);
     int rightHeight = getHeight(root.right);
     return (leftHeight > rightHeight ? leftHeight : rightHeight) + 1;
+  }
+
+  int getDiameter(Node? root) {
+    if (root == null) {
+      return 0;
+    }
+
+    int leftHeight = getHeight(root.left);
+    int rightHeight = getHeight(root.right);
+
+    int leftDiameter = getDiameter(root.left);
+    int rightDiameter = getDiameter(root.right);
+
+    return (leftHeight + rightHeight + 1).clamp(leftDiameter, rightDiameter);
   }
 }
 
